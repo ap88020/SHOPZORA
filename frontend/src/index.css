@@ -1,1 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Prata&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+a.active  hr {
+    display: block;
+    width: 30px;
+}
+
+*{
+    font-family: "outfit";
+}
+
+.inconsolata-custom {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400; /* or any weight between 200–900 */
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+@media screen and (max-width:640px) {
+  a.active {
+    background-color:black;
+    color:white;
+  }
+}
