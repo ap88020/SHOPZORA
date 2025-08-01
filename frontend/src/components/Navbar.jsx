@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className='bg-neutral-100 flex items-center justify-between py-5 px-5 font-medium'>
       
-      <Link to='/' ><img src={assets.logo} alt="" className='w-36' /></Link>
+      <Link to='/' ><img src={assets.logo2} alt="" className='w-36' /></Link>
       
       <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
 
