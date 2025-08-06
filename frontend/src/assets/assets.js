@@ -74,6 +74,8 @@ import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
+import Google_pay from './Gpay.png'
+import Phone_pay from './PhonePay.png'
 
 export const assets = {
     logo2,
@@ -94,7 +96,9 @@ export const assets = {
     contact_img,
     razorpay_logo,
     stripe_logo,
-    cross_icon
+    cross_icon,
+    Google_pay,
+    Phone_pay
 }
 
 export const products = [

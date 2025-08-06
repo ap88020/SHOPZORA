@@ -9,11 +9,11 @@ const Navbar = () => {
   const [visible, setvisible] = useState(false);
 
   return (
-    <div className='bg-neutral-100 flex items-center justify-between py-5 px-5 font-medium'>
+    <div className='bg-neutral-50 flex items-center justify-between py-5 px-5 font-medium'>
       
       <Link to='/' ><img src={assets.logo2} alt="" className='w-36' /></Link>
       
-      <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
+      <ul className='hidden sm:flex gap-5 text-sm text-pink-900'>
 
           <NavLink
             to='/' 
@@ -45,7 +45,7 @@ const Navbar = () => {
         <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className='w-6 cursor-pointer'/>
 
         <div className='group relative'>
-          <img src={assets.profile_icon} className='w-5 cursor-pointer' />
+          <Link to='/login'> <img src={assets.profile_icon} className='w-5 cursor-pointer' /></Link>
           <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-neutral-100 text-gray-500 rounded'>
               <p className='cursor-pointer hover:text-gray-700'>My profile</p>
@@ -57,7 +57,7 @@ const Navbar = () => {
 
         <Link to='/cart' className='relative'>
           <img src={assets.cart_icon} alt="" className='w-5 max-w-5' />
-          <p className='w-5 h-5 rounded-full bg-gray-800 text-white absolute text-center text-sm top-[15px] right-[-10px] leading-5' >{getCartCount()}</p>
+          <p className='w-5 h-5 rounded-full bg-pink-700 text-white absolute text-center text-sm top-[15px] right-[-10px] leading-5' >{getCartCount()}</p>
         </Link>
 
         <img src={assets.menu_icon} onClick={()=>setvisible(true)} alt="" className='cursor-pointer w-5  sm:hidden' />
