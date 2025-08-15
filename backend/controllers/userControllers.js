@@ -2,6 +2,7 @@ import validator from "validator";
 import userModel from '../models/userModel.js'
 import bcrypt from "bcrypt";
 import generateToken from "../config/generateToken.js";
+import jwt from 'jsonwebtoken';
 
 // Route for User registeration
 const registerUser = async (req,res) => {
@@ -45,12 +46,44 @@ const registerUser = async (req,res) => {
 
 // Route for User Login
 const loginUser = async (req,res) => {
+    try {
+        const { email, password } = req.body;
 
+        const user = await userModel.findOne({email});
+
+        if(!user){
+            return res.status(400).json({success:false , message: "User doesn't exists"});
+        }
+
+        const isMatch = await bcrypt.compare(password,user.password);
+
+        if(isMatch){
+            const token = generateToken(user._id);
+            return res.status(200).json({success:true , message: token});
+        }else{
+            return res.status(400).json({success:false , message:"Invalid credentials"});
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({success:false , message:error.message});
+    }
 }
 
 // Route for Admin login 
-const adminLogin = (req,res) => {
-
+const adminLogin = async (req,res) => {
+    try {
+        const { email, password } = req.body;
+        
+        if(email == process.env.ADMIN_EMAIL && password == process.env.ADMIN_PASSWORD){
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+            res.status(200).json({success:true, token});
+        }else{
+            res.status(400).json({success:false , message:"Invalid Credentials"});
+        }
+    } catch (error) {
+        res.status(400).json({success:true , message:error.message});
+    }
 }
 
 export {loginUser , registerUser , adminLogin};
