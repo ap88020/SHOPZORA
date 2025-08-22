@@ -21,8 +21,8 @@ const List = ({token}) => {
   };
 
   const removeProduct = async (id) => {
-    try {
-      const response = await axios.post(backend_url+"/api/product/remove",{id} , {headers:{token}});
+  try {
+    const response = await axios.post(backend_url+"/api/product/remove",{id} , {headers:{token}});
 
       if(response.data.success){
         toast.success(response.data.message);
