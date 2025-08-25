@@ -6,6 +6,7 @@ import connectCloudinary from './config/cloudinary.js';
 import userRouter from './routes/userRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import cartRouter from './routes/cartRoute.js';
+import orderRouter from './routes/ordersRoute.js';
 
 // APP CONFIG
 const app = express();
@@ -24,7 +25,8 @@ app.get('/',(req,res) => {
 
 app.use('/api/user',userRouter); 
 app.use('/api/product',productRouter); 
-app.use('/api/cart/',cartRouter)
+app.use('/api/cart/',cartRouter);
+app.use('/api/order',orderRouter);
 
 app.listen(port , ()=> {
     console.log(`App is listening at port : ${port}`);
