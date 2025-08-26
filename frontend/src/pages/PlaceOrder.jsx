@@ -4,12 +4,14 @@ import TotalCart from "../components/TotalCart";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState("cod");
 
-  const {navigate,backendUrl,token,cartItems,setCartItems,getCartAmount,delivery_fee,products} = useContext(ShopContext)
+  const {navigate,backend_url,token,cartItem,setCartItem,getCartAmount,delivery_fee,products} = useContext(ShopContext)
 
   const [formData , setFormData] = useState({
     firstName:'',
@@ -31,8 +33,49 @@ const PlaceOrder = () => {
   }
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  try {
+    let ordersItems = [];
+
+    for (const items in cartItem) {
+      for (const item in cartItem[items]) {
+        if (cartItem[items][item] > 0) {
+          const itemInfo = structuredClone(products.find(product => product._id === items));
+          if (itemInfo) {
+            itemInfo.size = item;
+            itemInfo.quantity = cartItem[items][item];
+            ordersItems.push(itemInfo);
+          }
+        }
+      }
+    }
+
+    let orderData = {
+      address: formData,
+      items: ordersItems,
+      amount: getCartAmount() + delivery_fee,
+    };
+
+    switch (method) {
+      case "cod":
+        const response = await axios.post(backend_url + "/api/order/place",orderData ,{ headers: { token } });
+        console.log(response);
+        if (response.data.success) {
+          setCartItem({});
+          navigate("/orders");  // ✅ now works
+        } else {
+          toast.error(response.data.message);
+        }
+        break;
+
+      default:
+        break;
+    }
+  } catch (error) {
+    toast.error(error.message);
   }
+};
+
 
   return (
     <form onSubmit={onSubmitHandler} className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
@@ -102,7 +145,7 @@ const PlaceOrder = () => {
           <input
             required
             onChange={onChangeHandler}
-            name="zipcode"
+            name="zipCode"
             value={formData.zipCode}
             type="number"
             placeholder="Zipcode"

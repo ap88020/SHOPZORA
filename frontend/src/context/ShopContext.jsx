@@ -39,7 +39,7 @@ const ShopContextProvider = (props) => {
     if(token){
       try {
         const response = await axios.post(backend_url+'/api/cart/add',{itemId,size},{headers:{token}});
-        console.log(response)
+        // console.log(response)
       } catch (error) {
         console.log(error);
         toast.error(error.message);

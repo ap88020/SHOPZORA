@@ -10,8 +10,8 @@ const placeOrder = async (req,res) => {
         const orderData = {
             userId,
             items,
-            address,
             amount,
+            address,
             paymentMethod:"COD",
             payment:false, 
             date: Date.now()
@@ -48,7 +48,17 @@ const allOrders = async (req,res) => {
 
 // userOrder data for Frontend
 const userOrders = async (req,res) => {
-    
+    try {
+        const { userId } = req.body;
+
+        const orders = await ordersModel.find({userId});
+
+        res.json({success:true, orders})
+        
+    } catch (error) {
+        console.log(error)
+        res.json({success:false , message:error.message})
+    }
 }
 
 // Update Orders Status From Admin Panel
