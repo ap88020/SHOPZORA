@@ -67,6 +67,16 @@ const PlaceOrder = () => {
           toast.error(response.data.message);
         }
         break;
+      
+      case "stripe":
+        const responseStripe = await axios.post(backend_url+"/api/order/stripe",orderData,{headers:{token}});
+        if(responseStripe.data.success){
+          const {session_url} = responseStripe.data;
+          window.location.replace(session_url)
+        }else{
+          toast.error(responseStripe.data.message)
+        }
+        break;
 
       default:
         break;
@@ -181,24 +191,24 @@ const PlaceOrder = () => {
           {/* Paymemnt method selection */}
           <div className="flex gap-3 flex-col lg:flex-row">
             <div
-              onClick={() => setMethod("phonePay")}
+              onClick={() => setMethod("stripe")}
               className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
             >
               <p
                 className={`min-w-3.5 h-3.5 border ${
-                  method == "phonePay" ? "bg-green-600" : ""
+                  method == "stripe" ? "bg-green-600" : ""
                 }`}
               ></p>
               <img src={assets.Phone_pay} className="h-10 mx-4" alt="" />
             </div>
 
             <div
-              onClick={() => setMethod("gPay")}
+              onClick={() => setMethod("stripe")}
               className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
             >
               <p
                 className={`min-w-3.5 h-3.5 border ${
-                  method == "gPay" ? "bg-green-600" : ""
+                  method == "stripe" ? "bg-green-600" : ""
                 }`}
               ></p>
               <img src={assets.Google_pay} className="h-10 mx-4" alt="" />
