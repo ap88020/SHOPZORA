@@ -54,13 +54,19 @@ const Navbar = () => {
         <div className='group relative'>
           <img onClick={()=>token ? null : navigate('/')} src={assets.profile_icon} className='w-5 cursor-pointer' />
           {
-            token && <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
+            token ?
+            <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-neutral-100 text-gray-500 rounded'>
               <p className='cursor-pointer hover:text-gray-700'>My profile</p>
               <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-gray-700'>Orders</p>
               <p onClick={logout}  className='cursor -pointer hover:text-gray-700'>Logout</p>
             </div>
-          </div>
+          </div> :
+            <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
+            <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-neutral-100 text-gray-500 rounded'>
+              <p onClick={logout}  className='cursor -pointer hover:text-gray-700'>Login</p>
+            </div>
+          </div>  
           }
         </div>
 

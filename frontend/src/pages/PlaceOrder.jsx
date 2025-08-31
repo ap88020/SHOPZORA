@@ -62,7 +62,7 @@ const PlaceOrder = () => {
         console.log(response);
         if (response.data.success) {
           setCartItem({});
-          navigate("/orders");  // ✅ now works
+          navigate("/orders");
         } else {
           toast.error(response.data.message);
         }
