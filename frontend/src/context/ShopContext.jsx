@@ -22,6 +22,11 @@ const ShopContextProvider = (props) => {
       return;
     }
 
+    if(!token){
+      toast.error('Please login')
+      return
+    }
+
     let cartData = structuredClone(cartItem);
     if (cartData[itemId]) {
       if (cartData[itemId][size]) {
@@ -39,7 +44,6 @@ const ShopContextProvider = (props) => {
     if(token){
       try {
         const response = await axios.post(backend_url+'/api/cart/add',{itemId,size},{headers:{token}});
-        // console.log(response)
       } catch (error) {
         console.log(error);
         toast.error(error.message);
