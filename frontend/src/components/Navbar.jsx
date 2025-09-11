@@ -2,11 +2,12 @@ import {useContext, useState} from 'react'
 import {assets} from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext'
-
+import CartDrawer from './CartDrawer'
 
 const Navbar = () => {
   const {setShowSearch,getCartCount,navigate,token , setToken, setCartItem} = useContext(ShopContext);
   const [visible, setvisible] = useState(false);
+  const [cartOpen , setCartOpen] = useState(false);
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -70,10 +71,10 @@ const Navbar = () => {
           }
         </div>
 
-        <Link to='/cart' className='relative'>
+        <div className='cursor-pointer relative' onClick={()=>{setCartOpen(true)}}>
           <img src={assets.cart_icon} alt="" className='w-5 max-w-5' />
           <p className='w-5 h-5 rounded-full bg-pink-700 text-white absolute text-center text-sm top-[15px] right-[-10px] leading-5' >{getCartCount()}</p>
-        </Link>
+        </div>
 
         <img src={assets.menu_icon} onClick={()=>setvisible(true)} alt="" className='cursor-pointer w-5  sm:hidden' />
       </div>
@@ -90,7 +91,7 @@ const Navbar = () => {
             <NavLink onClick={()=>setvisible(false)} className='pl-6 py-2 border' to='/contact' >CONTACT</NavLink>
           </div>
       </div>
-
+        < CartDrawer isOpen={cartOpen} onClose={()=>{setCartOpen(false)}} />
     </div>
   )
 }

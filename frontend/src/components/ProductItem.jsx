@@ -6,11 +6,15 @@ const ProductItem = ({id,image,name,price}) => {
     const { currency } = useContext(ShopContext);
   return (
     <Link className='text-gray-700 cursor-pointer' to={`/product/${id}`}>
-        <div className='overflow-hidden'>
-            <img className='hover:scale-110 transition ease-in-out' src={image[0]} alt="" />
+        <div className='w-full h-80 flex items-center justify-center overflow-hidden rounded bg-gray-100'>
+            <img 
+              className='h-full w-full object-cover hover:scale-110 transition ease-in-out' 
+              src={image[0]} 
+              alt={name} 
+            />
         </div>
         <p className='pt-3 pb-1 text-sm'>{name}</p>
-        <p className='text-sm font-medium' >{currency}{price}</p> 
+        <p className='text-sm font-medium'>{currency}{price}</p> 
     </Link>
   )
 }
