@@ -5,8 +5,7 @@ import { assets } from "../assets/assets";
 import TotalCart from "../components/TotalCart";
 
 const Cart = () => {
-  const { products, currency, cartItem, updateQuantity, navigate } =
-    useContext(ShopContext);
+  const { products, currency, cartItem, updateQuantity, navigate } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
@@ -64,21 +63,47 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-              <input
-                onChange={(e) =>
-                  e.target.value == "" || e.target.value == "0"
-                    ? null
-                    : updateQuantity(
-                        item._id,
-                        item.size,
-                        Number(e.target.value)
-                      )
-                }
-                className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
-                type="number"
-                min={1}
-                defaultValue={item.quantity}
-              />
+              <div className="flex items-center gap-x-2">
+                    {/* Quantity Input */}
+                    <div className="flex items-center border border-pink-200 ">
+                      {/* Minus Button */}
+                      <button
+                        className="px-2 py-1 text-lg hover:bg-pink-100"
+                        onClick={() =>
+                          item.quantity > 1
+                            ? updateQuantity(
+                                item._id,
+                                item.size,
+                                item.quantity - 1
+                              )
+                            : updateQuantity(item._id, item.size, 0)
+                        }
+                      >
+                        -
+                      </button>
+                      {/* Quantity Display */}
+                      <span className="px-3 font-medium text-sm">
+                        {item.quantity}
+                      </span>
+                      {/* Plus Button */}
+                      <button
+                        className="px-2 py-1 text-lg hover:bg-pink-100"
+                        onClick={() =>
+                          updateQuantity(item._id, item.size, item.quantity + 1)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    {/* Delete Button */}
+                    <button
+                      className="px-2 py-1 border text-white text-lg bg-pink-300 border-pink-300 hover:bg-pink-400"
+                      onClick={() => updateQuantity(item._id, item.size, 0)}
+                    >
+                      X
+                    </button>
+                  </div>
               <img
                 onClick={() => updateQuantity(item._id, item.size, 0)}
                 src={assets.bin_icon}
