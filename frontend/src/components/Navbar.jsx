@@ -52,24 +52,49 @@ const Navbar = () => {
       <div className='flex item gap-6'>
         <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className='w-6 cursor-pointer'/>
 
-        <div className='group relative'>
-          <img onClick={()=>token ? null : navigate('/')} src={assets.profile_icon} className='w-5 cursor-pointer' />
-          {
-            token ?
-            <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
-            <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-neutral-100 text-gray-500 rounded'>
-              <p onClick={()=>navigate('/profile')} className='cursor-pointer hover:text-gray-700'>My profile</p>
-              <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-gray-700'>Orders</p>
-              <p onClick={logout}  className='cursor -pointer hover:text-gray-700'>Logout</p>
-            </div>
-          </div> :
-            <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
-            <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-neutral-100 text-gray-500 rounded'>
-              <p onClick={logout}  className='cursor -pointer hover:text-gray-700'>Login</p>
-            </div>
-          </div>  
-          }
-        </div>
+        <div className="group relative">
+  <img
+    onClick={() => (token ? null : navigate("/"))}
+    src={assets.profile_icon}
+    className="w-5 cursor-pointer"
+  />
+  {token ? (
+    <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-2 z-50 opacity-0 scale-95 -translate-y-2 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+      <div className="flex flex-col gap-2 w-36 py-3 px-2 bg-neutral-100 text-gray-500 rounded shadow-md">
+        <p
+          onClick={() => navigate("/profile")}
+          className="cursor-pointer hover:text-gray-700 hover:bg-pink-300 px-2 rounded transition-all"
+        >
+          My profile
+        </p>
+        <p
+          onClick={() => navigate("/orders")}
+          className="cursor-pointer hover:text-gray-700 hover:bg-pink-300 px-2 rounded transition-all"
+        >
+          Orders
+        </p>
+        <p
+          onClick={logout}
+          className="cursor-pointer hover:text-gray-700 hover:bg-pink-300 px-2 rounded transition-all"
+        >
+          Logout
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-2 z-50 opacity-0 scale-95 -translate-y-2 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+      <div className="flex flex-col gap-2 w-36 py-3 px-2 bg-neutral-100 text-gray-500 rounded shadow-md">
+        <p
+          onClick={() => navigate("/login")}
+          className="cursor-pointer hover:text-gray-700 hover:bg-pink-300 px-2 rounded transition-all"
+        >
+          Login
+        </p>
+      </div>
+    </div>
+  )}
+</div>
+
 
         <div className='cursor-pointer relative' onClick={()=>{setCartOpen(true)}}>
           <img src={assets.cart_icon} alt="" className='w-5 max-w-5' />

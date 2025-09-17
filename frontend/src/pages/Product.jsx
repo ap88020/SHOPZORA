@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import RelatedProduct from "./RelatedProduct";
@@ -21,6 +21,8 @@ const Product = () => {
       }
     });
   };
+
+
 
   useEffect(() => {
     fetchProductData();

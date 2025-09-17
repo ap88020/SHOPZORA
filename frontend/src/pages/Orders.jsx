@@ -15,7 +15,7 @@ const Orders = () => {
   const { backend_url, token, currency } = useContext(ShopContext);
 
   const [orderData, setOrderdata] = useState([]);
-  const [trackingIndex, setTrackingIndex] = useState(null); // Which order is being tracked
+  const [trackingIndex, setTrackingIndex] = useState(null);
 
   const loadOrderData = async () => {
     try {

@@ -16,14 +16,16 @@ import SearchBar from './components/SearchBar'
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Profile from './pages/Profile'
+import ScrollToTop from './components/ScrollToTop'
 
 
 const App = () => {
   return (
-    <div className='px-4 md:px-[7vw] sm:px-[5vw] lg:px-[9vw]'>
+    <div className='px-4 md:px-[7vw] sm:px-[5vw] lg:px-[9vw] scroll-smooth'>
       < ToastContainer />
       < Navbar />
       < SearchBar />
+      < ScrollToTop />
       <Routes>
         <Route path='/' element={< Home />} />
         <Route path='/collection' element={< Collection />} />

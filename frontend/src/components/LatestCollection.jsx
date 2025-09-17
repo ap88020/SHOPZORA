@@ -16,9 +16,9 @@ const LatestCollection = () => {
 
     if(search && showSearch){
         filtered = filtered.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
-        filtered = filtered.slice(0,5);
+        filtered = filtered.slice(0,10);
     }else{
-        filtered = [...products].sort(() => Math.random() - 0.5).slice(0,5);
+        filtered = [...products].sort(() => Math.random() - 0.5).slice(0,12);
     }
 
     setFilterProducts(filtered)
