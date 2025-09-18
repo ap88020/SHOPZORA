@@ -44,6 +44,11 @@ const ShopContextProvider = (props) => {
     if(token){
       try {
         const response = await axios.post(backend_url+'/api/cart/add',{itemId,size},{headers:{token}});
+        if(!response.status.success && response.data.message === "Please Login Again"){
+          toast.error("Login Again")
+          localStorage.removeItem('token')
+          return;
+        }
       } catch (error) {
         console.log(error);
         toast.error(error.message);
